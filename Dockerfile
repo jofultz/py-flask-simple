@@ -49,50 +49,43 @@ RUN cat /etc/issue
 #end here - original ML install
 
 #start modified ML install
-RUN apt-get -y update \
-   && apt-get install -y apt-transport-https wget \
-   && echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ xenial main" | tee /etc/apt/sources.list.d/azure-cli.list \
-   && wget https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb -O /tmp/prod.deb \
-   && dpkg -i /tmp/prod.deb \
-   && rm -f /tmp/prod.deb \
-   && apt-key adv --keyserver packages.microsoft.com --recv-keys 52E16F86FEE04B979B07E28DB02C46DF417A0893 \
-   && apt-get -y update \
-   && apt-get install -y microsoft-mlserver-python-9.3.0 \
-   && apt-get install -y azure-cli=2.0.26-1~xenial \
-   && apt-get install -y dotnet-runtime-2.0.0 \
-   && apt-get install -y microsoft-mlserver-adminutil-9.3.0 \
-   && apt-get install -y microsoft-mlserver-computenode-9.3.0 \
-   && apt-get install -y microsoft-mlserver-webnode-9.3.0 \
-   && apt-get clean \
-   && /opt/microsoft/mlserver/9.3.0/bin/R/activate.sh
+#RUN apt-get -y update \
+#   && apt-get install -y apt-transport-https wget \
+#   && echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ xenial main" | tee /etc/apt/sources.list.d/azure-cli.list \
+#   && wget https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb -O /tmp/prod.deb \
+#   && dpkg -i /tmp/prod.deb \
+#   && rm -f /tmp/prod.deb \
+#   && apt-key adv --keyserver packages.microsoft.com --recv-keys 52E16F86FEE04B979B07E28DB02C46DF417A0893 \
+#   && apt-get -y update \
+#   && apt-get install -y microsoft-mlserver-python-9.3.0 \
+#   && apt-get install -y azure-cli=2.0.26-1~xenial \
+#   && apt-get install -y dotnet-runtime-2.0.0 \
+#   && apt-get install -y microsoft-mlserver-adminutil-9.3.0 \
+#   && apt-get install -y microsoft-mlserver-computenode-9.3.0 \
+#   && apt-get install -y microsoft-mlserver-webnode-9.3.0 \
+#   && apt-get clean \
+#   && /opt/microsoft/mlserver/9.3.0/bin/R/activate.sh
 #end modified ML install
 
 #add needed packages for front-end app
-RUN pip install dash-core-components
-RUN pip install dash-html-components
-RUN pip install dash_dangerously_set_inner_html
-RUN pip install pandas
-RUN import dash
-RUN from dash.dependencies import Input, Output, State
-RUN from flask import g, session, request
-RUN import flask
-RUN import datetime as dt
-RUN import time
-RUN import requests
-RUN import traceback
-RUN import json
-RUN import urllib
-RUN import uuid
-RUN from api_ml_calls import link_lookup, tag_lookup, cluster_one_line, extract_keywords, predict_title, predict_hard, predict_soft, get_best_actions, runtime_logging, fix_strings
+#RUN pip install dash-core-components
+#RUN pip install dash-html-components
+#RUN pip install dash_dangerously_set_inner_html
+#RUN pip install pandas
+#RUN pip install requests
+#RUN pip install traceback
+#RUN pip install json
+#RUN pip install urllib
+#RUN pip install uuid
  
-RUN #import api_ml_calls as ml_api
-RUN import sys
-RUN import os
-
-RUN import appstrings as strs
-RUN import styles as styles
-RUN import html_elements as elements
-RUN import images as images
+#RUN #import api_ml_calls as ml_api
+#RUN import sys
+#RUN import os
+#
+#RUN import appstrings as strs
+#RUN import styles as styles
+#RUN import html_elements as elements
+#RUN import images as images
 
 
 # Verification step: look for the mlserver.list configuration file
