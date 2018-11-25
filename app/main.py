@@ -2,7 +2,8 @@
 
 from flask import Flask
 from flask import render_template
-import cpudriver 
+#import cpudriver 
+import tempDriver
 
 app = Flask(__name__)
 
@@ -21,8 +22,9 @@ def test():
 @app.route('/helloworld')
 @app.route('/helloworld/')
 def render_static(pageName=None):
-    for runIndex in range(100):
-      cpudriver.GenerateArrayAndHash()
+    #for runIndex in range(100):
+    #  cpudriver.GenerateArrayAndHash()
+    tempDriver.Drive()
     return render_template('helloworld.html', name=pageName)
 
 
