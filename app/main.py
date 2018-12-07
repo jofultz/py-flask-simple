@@ -3,7 +3,7 @@
 from flask import Flask
 from flask import render_template
 from flask import request
-#import cpudriver 
+
 import tempDriver
 
 app = Flask(__name__)
@@ -26,7 +26,7 @@ def render_static(pageName=None):
     #for runIndex in range(100):
     #  cpudriver.GenerateArrayAndHash()
     loopCount = request.args.get('loopCount', default=10, type=int)
-    print ("loopCount = " + str(loopCount))
+    #print ("loopCount = " + str(loopCount))
     tempDriver.Drive(loopCount)
     return render_template('helloworld.html', name=pageName)
 
