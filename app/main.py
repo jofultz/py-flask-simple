@@ -28,7 +28,7 @@ def render_static(pageName=None):
     loopCount = request.args.get('loopCount', default=10, type=int)
     #print ("loopCount = " + str(loopCount))
     tempDriver.Drive(loopCount)
-    return render_template('helloworld.html', name=pageName)
+    return render_template('helloworld.html', name=pageName, headers=request.headers)
 
 
 if __name__ == '__main__':
