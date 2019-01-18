@@ -4,7 +4,9 @@ from flask import Flask
 from flask import render_template
 from flask import request
 
+import sys
 import tempDriver
+import base64
 
 app = Flask(__name__)
 
@@ -23,12 +25,19 @@ def test():
 @app.route('/helloworld')
 @app.route('/helloworld/')
 def render_static(pageName=None):
-    #for runIndex in range(100):
-    #  cpudriver.GenerateArrayAndHash()
+
     loopCount = request.args.get('loopCount', default=10, type=int)
-    #print ("loopCount = " + str(loopCount))
     tempDriver.Drive(loopCount)
-    return render_template('helloworld.html', name=pageName, headers=request.headers)
+
+    #decode client principal to pass to template and display in browser
+    encodedClientPrincipal = request.headers['X-Ms-Client-Principal']
+    decodedClientPrincipal = base64.b64decode(encodedClientPrincipal)
+
+    #write to app service log via standard out
+    #sys.stdout.write("user: " + str(request.headers['X-Ms-Client-Principal-Name']) + '\n')
+    #sys.stdout.write("decoded client principal: " + str(decodedClientPrincipal) + '\n')
+
+    return render_template('helloworld.html', name=pageName, headers=request.headers, clientPrincipal = decodedClientPrincipal)
 
 
 if __name__ == '__main__':
